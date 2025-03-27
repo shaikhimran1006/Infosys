@@ -1,0 +1,62 @@
+package com.infosys.expenseManagementApplication.dao;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.infosys.expenseManagementApplication.bean.Expense;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
+
+@Repository
+@Transactional
+public class ExpenseDaoImpl implements ExpenseDao {
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Override
+    public Expense save(Expense expense) {
+        entityManager.merge(expense);
+        return expense;
+    }
+
+    @Override
+    public List<Expense> getAllExpenses() {
+        Query query = entityManager.createQuery("SELECT e FROM Expense e");
+        return query.getResultList();
+    }
+
+    @Override
+    public Expense getExpenseByNumber(String number) {
+        return entityManager.find(Expense.class, number);
+    }
+
+    @Override
+    public String generateExpenseNumber() {
+        Query query = entityManager.createQuery("SELECT MAX(e.expenseNumber) FROM Expense e");
+        String lastExpenseNumber = (String) query.getSingleResult();
+        if (lastExpenseNumber == null) {
+            return "EXP001";
+        }
+        int nextNumber = Integer.parseInt(lastExpenseNumber.substring(3)) + 1;
+        return "EXP" + String.format("%03d", nextNumber);
+    }
+
+    @Override
+    public Expense getExpenseByCategory(Long categoryId) {
+        Query query = entityManager.createQuery("SELECT e FROM Expense e WHERE e.categoryId = :categoryId");
+        query.setParameter("categoryId", categoryId);
+        List<Expense> result = query.getResultList();
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+    @Override
+    public Expense getExpenseByCustomer(String customerId) {
+        Query query = entityManager.createQuery("SELECT e FROM Expense e WHERE e.customerId = :customerId");
+        query.setParameter("customerId", customerId);
+        List<Expense> result = query.getResultList();
+        return result.isEmpty() ? null : result.get(0);
+    }
+}

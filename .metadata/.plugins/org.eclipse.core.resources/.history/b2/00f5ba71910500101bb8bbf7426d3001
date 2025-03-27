@@ -1,0 +1,15 @@
+package com.infosys.expenseManagementApplication.bean;
+
+import java.sql.Date;
+
+import jakarta.persistence.Entity;
+@Entity
+
+public class Expense {
+	private int id;
+    private String user;
+    private double amount;
+    private Date date;
+    private String category;
+    private String description;
+}

@@ -1,0 +1,53 @@
+package com.infosys.expenseManagementApplication.dao;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.infosys.expenseManagementApplication.bean.Expense;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
+
+@Repository
+@Transactional
+public class ExpenseDaoImpl implements ExpenseDao {
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Override
+    public void save(Expense expense) {
+        entityManager.merge(expense);
+        return expense;
+    }
+
+    @Override
+    public List<Expense> getAllExpenses() {
+        Query query = entityManager.createQuery("SELECT e FROM Expense e");
+        return query.getResultList();
+    }
+
+   
+
+
+   
+
+	@Override
+	public Expense getExpenseById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Expense deleteExpenseById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String generateExpenseId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

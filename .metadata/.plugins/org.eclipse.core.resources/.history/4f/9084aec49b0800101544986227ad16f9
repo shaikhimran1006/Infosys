@@ -1,0 +1,57 @@
+package com.infosys.expenseManagementApplication.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.infosys.expenseManagementApplication.bean.Expense;
+import com.infosys.expenseManagementApplication.dao.ExpenseDao;
+import com.infosys.expenseManagementApplication.service.ExpenseUserService;
+
+@RestController
+@RequestMapping("/exp-mng/")
+@CrossOrigin(origins = "http://localhost:5656")
+public class ExpenseReportController {
+
+    @Autowired
+    private ExpenseDao expenseDao; 
+
+    @Autowired
+    private ExpenseUserService service; 
+    @GetMapping("/expense")
+    public List<Expense> getAllExpenses() {
+        return expenseDao.getAllExpenses();
+    }
+
+    @GetMapping("/expense/{expenseNumber}")
+    public Expense getExpenseByNumber(@PathVariable String expenseNumber) {
+        return expenseDao.getExpenseByNumber(expenseNumber);
+    }
+
+    
+    @PostMapping("/expense")
+    public Expense saveExpense(@RequestBody Expense expense) {
+        String customerId = ExpenseUserService.getCustomerById(); 
+        expense.setCustomerId(customerId);
+        expense.setExpenseNumber(expenseDao.generateExpenseNumber()); 
+        return expenseDao.save(expense);
+    }
+
+
+    @PutMapping("/expense")
+    public void updateExpense(@RequestBody Expense expense) {
+        expenseDao.save(expense);
+    }
+
+    
+    
+   
+}

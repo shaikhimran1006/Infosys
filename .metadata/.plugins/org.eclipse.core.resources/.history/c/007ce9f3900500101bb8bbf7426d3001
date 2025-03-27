@@ -1,0 +1,12 @@
+package com.infosys.expenseManagementApplication.bean;
+
+import java.sql.Date;
+
+public class expense {
+	private int id;
+    private String user;
+    private double amount;
+    private Date date;
+    private String category;
+    private String description;
+}

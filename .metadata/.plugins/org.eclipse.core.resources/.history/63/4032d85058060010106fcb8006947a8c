@@ -1,0 +1,17 @@
+package com.infosys.expenseManagementApplication.bean;
+
+import jakarta.persistence.*;
+
+
+@Entity
+public class Expense {
+
+    @Id
+    private String expenseNumber;
+    private String customerId;
+    private Long categoryId;
+    private String expenseDate;
+    private Double amount;
+    private String description;
+    
+}

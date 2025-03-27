@@ -1,0 +1,59 @@
+package com.infosys.expenseManagementApplication.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+import com.infosys.expenseManagementApplication.bean.Expense;
+import com.infosys.expenseManagementApplication.dao.ExpenseDao;
+import com.infosys.expenseManagementApplication.dao.CustomerDao;
+import com.infosys.expenseManagementApplication.service.ExpenseUserService;
+
+@RestController
+@RequestMapping("/exp-mng/")
+@CrossOrigin(origins = "http://localhost:5656")
+public class ExpenseReportController {
+
+    @Autowired
+    private ExpenseDao expenseDao;
+
+    @Autowired
+    private CustomerDao customerDao;
+
+    @Autowired
+    private ExpenseUserService service;
+
+    @PostMapping("/expense")
+    public Expense saveExpense(@RequestBody Expense expense) {
+        String customerId = service.getUserId();
+        expense.setCustomerId(customerId);
+        expense.setExpenseNumber(expenseDao.generateExpenseNumber());
+        return expenseDao.save(expense);
+    }
+
+    @PutMapping("/expense")
+    public void updateExpense(@RequestBody Expense expense) {
+        expenseDao.save(expense);
+    }
+
+    @GetMapping("/expenses")
+    public List<Expense> getAllExpenses() {
+        return expenseDao.getAllExpenses();
+    }
+
+    @GetMapping("/expense/{number}")
+    public Expense getExpenseByNumber(@PathVariable String number) {
+        return expenseDao.getExpenseByNumber(number);
+    }
+
+    @GetMapping("/expenses-by-customer")
+    public Expense getExpensesByCustomer() {
+        String customerId = service.getUserId();
+        return expenseDao.getExpenseByCustomer(customerId);
+    }
+
+    @GetMapping("/expenses-by-category/{categoryId}")
+    public Expense getExpenseByCategory(@PathVariable Long categoryId) {
+        return expenseDao.getExpenseByCategory(categoryId);
+    }
+}

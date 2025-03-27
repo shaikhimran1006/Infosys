@@ -1,0 +1,12 @@
+package com.infosys.expenseManagementApplication.controller;
+
+import com.infosys.expenseManagementApplication.bean.Customer;
+import com.infosys.expenseManagementApplication.dao.CustomerDao;
+import com.infosys.expenseManagementApplication.service.ExpenseUserService;
+
+@RestController
+@RequestMapping("/exp-mng/")
+@CrossOrigin(origins = "http://localhost:5656")
+public class ExpenseReportController {
+
+}
