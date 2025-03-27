@@ -62,47 +62,98 @@ const CustomerAddition = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center mt-5">
-      <Card style={{ width: "30rem", padding: "20px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)" }}>
-        <Card.Body>
-          <Card.Title className="text-center mb-4 fs-3 fw-bold">New Customer Registration</Card.Title>
-          <Form onSubmit={customerSave}>
-            
-            <Form.Group className="mb-3">
-              <Form.Label>Customer ID:</Form.Label>
-              <Form.Control type="text" value={newId} readOnly />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Customer Name:</Form.Label>
-              <Form.Control type="text" name="customerName" value={customer.customerName} onChange={onChangeHandler} required />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Customer Address:</Form.Label>
-              <Form.Control type="text" name="address" value={customer.address} onChange={onChangeHandler} required />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Customer Mobile:</Form.Label>
-              <Form.Control type="text" name="mobile" value={customer.mobile} onChange={onChangeHandler} required />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Customer Occupation:</Form.Label>
-              <Form.Control type="text" name="occupation" value={customer.occupation} onChange={onChangeHandler} required />
-            </Form.Group>
-
-            <div className="text-center">
-              <Button variant="success" type="submit">
-                Save
-              </Button>
+    <div 
+            className="register-background" 
+            style={{ 
+                backgroundImage: "url('https://images.unsplash.com/photo-1565021324587-5fd009870e68?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fERhcmslMjBibHVlfGVufDB8fDB8fHww')", 
+                backgroundSize: "cover", 
+                backgroundPosition: "center", 
+                minHeight: "100vh", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center" 
+            }}
+        >
+            <div 
+                className="card" 
+                style={{ 
+                    width: "400px", 
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",  // Transparent effect
+                    backdropFilter: "blur(10px)", 
+                    borderRadius: "10px", 
+                    padding: "20px", 
+                    color: "#ffffff", // White text for contrast
+                    textAlign: "center", 
+                    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)"
+                }}
+            >
+                <h2><u>New Customer Registration</u></h2>
+                <br />
+                <form onSubmit={customerSave}>
+                    <div className="form-group text-start">
+                        <label>Customer ID:</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            value={newId} 
+                            readOnly 
+                            style={{ backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#fff", border: "1px solid #ccc" }}
+                        />
+                    </div>
+                    <div className="form-group mt-3 text-start">
+                        <label>Customer Name:</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="customerName"
+                            value={customer.customerName} 
+                            onChange={onChangeHandler} 
+                            required 
+                            style={{ backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#fff", border: "1px solid #ccc" }}
+                        />
+                    </div>
+                    <div className="form-group mt-3 text-start">
+                        <label>Customer Address:</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="address"
+                            value={customer.address} 
+                            onChange={onChangeHandler} 
+                            required 
+                            style={{ backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#fff", border: "1px solid #ccc" }}
+                        />
+                    </div>
+                    <div className="form-group mt-3 text-start">
+                        <label>Customer Mobile:</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="mobile"
+                            value={customer.mobile} 
+                            onChange={onChangeHandler} 
+                            required 
+                            style={{ backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#fff", border: "1px solid #ccc" }}
+                        />
+                    </div>
+                    <div className="form-group mt-3 text-start">
+                        <label>Customer Occupation:</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="occupation"
+                            value={customer.occupation} 
+                            onChange={onChangeHandler} 
+                            required 
+                            style={{ backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#fff", border: "1px solid #ccc" }}
+                        />
+                    </div>
+                    <br />
+                    <button className="btn w-100" type="submit" style={{ backgroundColor: "#007bff", color: "#fff" }}>Save</button>
+                </form>
             </div>
+        </div>
 
-          </Form>
-        </Card.Body>
-      </Card>
-    </Container>
   );
 };
 

@@ -15,47 +15,45 @@ function CustomerMenu() {
     }, []);
 
     return (
-        <>
-            <Navbar bg="success" variant="dark" expand="lg" className="px-3">
-                <Container fluid>
-                    <Navbar.Brand className="fw-bold fs-4 text-warning">
-                        Expense Management Customer Menu
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
-                            <NavDropdown title="Customer" className="fw-bold">
-                                <NavDropdown.Item onClick={() => navigate("/customer-add")}>
-                                    Customer Registrations
-                                </NavDropdown.Item>
-                                <NavDropdown.Item 
-                                    onClick={() => navigate(`/customer-details/${customerId}`)}
-                                >
-                                    Customer Details
-                                </NavDropdown.Item>
-                            </NavDropdown>
+        <div style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1565021324587-5fd009870e68?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fERhcmslMjBibHVlfGVufDB8fDB8fHww')", 
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+      }}>
+    <Navbar style={{ backgroundColor: "#001F3F" ,height: "80px"}} variant="dark" expand="lg" className="py-3" >
+      <Container fluid>
+        {/* Left Side - System Name */}
+        <Navbar.Brand className="fw-bold fs-4 text-warning">Expense Management Customer Menu</Navbar.Brand>
 
-                            <NavDropdown title="Expense" className="fw-bold">
-                                <NavDropdown.Item onClick={() => navigate("/expense-entry")}>
-                                    Expense Entry
-                                </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate("/customer-category-list")}>
-                                    Category List
-                                </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate("/expense-report")}>
-                                    Expense Report
-                                </NavDropdown.Item>
-                            </NavDropdown>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto d-flex align-items-center">
+            {/* Customer Dropdown */}
+            <NavDropdown title="Customer" className="mx-3 fw-bold fs-5">
+              <NavDropdown.Item onClick={() => navigate("/customer-add")}>Customer Registration</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate(`/customer-details/${customerId}`)}>Customer Details</NavDropdown.Item>
+            </NavDropdown>
 
-                            <Nav.Link onClick={() => { localStorage.clear(); navigate("/"); }} 
-                                className="fw-bold text-danger">
-                                Logout
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </>
+            {/* Expense Dropdown */}
+            <NavDropdown title="Expense" className="mx-3 fw-bold fs-5">
+              <NavDropdown.Item onClick={() => navigate("/expense-entry")}>Expense Entry</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/customer-category-list")}>Category List</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/expense-report")}>Expense Report</NavDropdown.Item>
+            </NavDropdown>
+
+            {/* Logout */}
+            <Nav.Link onClick={() => { localStorage.clear(); navigate("/"); }} className="text-danger fw-bold mx-3 fs-5" style={{ cursor: "pointer" }}>
+              Logout
+            </Nav.Link>
+
+            {/* Profile mentioning Customer */}
+            <Nav.Link className="fw-bold text-warning mx-3 fs-5">Customer</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+</div>
     );
 }
 

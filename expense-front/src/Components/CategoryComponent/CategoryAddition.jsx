@@ -43,36 +43,52 @@ const categoerySave=(event)=>{
 }
 
     return(
-        <div>
-        <br></br>
-         <div className = "container">
-           <div className = "row">
-              <div className = "card col-md-12 offset-md-3 offset-md-3">
-                <div className = "card-body">
-                  <h2 className="text-center"><u>New Category Addition</u></h2>
-                  <br/>
-                  <form>
-                 <div className = "form-group">
-                   <label>Category Id: </label>
-                   <input placeholder="Category Id" name="categoryId" className="form-control" value={newId} />
-                 </div>
-                 <div className = "form-group">
-                    <label>Category Name: </label>
-                    <input placeholder="Category Name" name="categoryName" className="form-control"
-                                    value={category.categoryName} onChange={onChangeHandler}/>
-                 </div>
-                 <div className = "form-group">
-                    <label>Category Description: </label>
-                    <input placeholder="Category Description" name="description" className="form-control"
-                                    value={category.description} onChange={onChangeHandler}/>
-                 </div>
-                <button className="btn btn-success" onClick={categoerySave}>Save</button>
-             </form>
-             </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div 
+            style={{ 
+                backgroundImage: "url('https://images.unsplash.com/photo-1565021324587-5fd009870e68?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fERhcmslMjBibHVlfGVufDB8fDB8fHww')", 
+                backgroundSize: "cover", 
+                backgroundPosition: "center", 
+                minHeight: "100vh", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                flexDirection: "column",
+                padding: "20px" 
+            }}
+        >
+            <div 
+                className="card" 
+                style={{ 
+                    width: "30%", 
+                    backgroundColor: "rgb(50 64 80 / 59%)", 
+                    backdropFilter: "blur(10px)", 
+                    borderRadius: "12px", 
+                    padding: "20px", 
+                    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                    color: "#ecf0f1", 
+                    textAlign: "center" 
+                }}
+            >
+                <h2 style={{ color: "#f1c40f" }}><u>New Category Addition</u></h2>
+                <hr style={{ height: "3px", borderWidth: 0, backgroundColor: "#e67e22" }} />
+                <form>
+                    <div className="form-group text-start">
+                        <label>Category Id:</label>
+                        <input type="text" className="form-control" placeholder="Category Id" name="categoryId" value={newId} readOnly />
+                    </div>
+                    <div className="form-group text-start mt-2">
+                        <label>Category Name:</label>
+                        <input type="text" className="form-control" placeholder="Category Name" name="categoryName" value={category.categoryName} onChange={onChangeHandler} />
+                    </div>
+                    <div className="form-group text-start mt-2">
+                        <label>Category Description:</label>
+                        <input type="text" className="form-control" placeholder="Category Description" name="description" value={category.description} onChange={onChangeHandler} />
+                    </div>
+                    <button className="btn mt-3" onClick={categoerySave} style={{ backgroundColor: "#27ae60", color: "#fff", width: "25%" }}>Save</button>
+                </form>
+            </div>
+        </div>
+
 
     );
 };

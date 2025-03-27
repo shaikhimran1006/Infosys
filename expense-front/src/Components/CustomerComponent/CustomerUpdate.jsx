@@ -81,72 +81,90 @@ const CustomerUpdate = () => {
   }
 
   return (
-    <Container className="d-flex justify-content-center mt-4">
-      <Card style={{ width: "28rem", padding: "15px", borderRadius: "8px", boxShadow: "0 0 8px rgba(0,0,0,0.1)" }}>
-        <Card.Body>
-          <Card.Title className="text-center mb-3 fs-5 fw-semibold text-primary">Update Customer</Card.Title>
+    <div 
+            style={{ 
+                backgroundImage: "url('https://images.unsplash.com/photo-1565021324587-5fd009870e68?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fERhcmslMjBibHVlfGVufDB8fDB8fHww')", 
+                backgroundSize: "cover", 
+                backgroundPosition: "center", 
+                minHeight: "100vh", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                flexDirection: "column",
+                padding: "20px" 
+            }}
+        >
+            <div 
+                className="card" 
+                style={{ 
+                    width: "40%", 
+                    backgroundColor: "rgb(50 64 80 / 59%)", 
+                    backdropFilter: "blur(10px)", 
+                    borderRadius: "12px", 
+                    padding: "20px", 
+                    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                    color: "#ecf0f1", 
+                    textAlign: "center" 
+                }}
+            >
+                <h2 style={{ color: "#ffff", fontSize:"30px" }}><u>Update Customer</u></h2>
+                <hr style={{ height: "3px", borderWidth: 0, backgroundColor: "#e67e22" }} />
+                {error && <p style={{ color: "#c0392b", fontSize: "14px" }}>{error}</p>}
+                <form onSubmit={handleUpdate}>
+                    <div className="row mb-2">
+                        <div className="col">
+                            <label>Customer ID</label>
+                            <input type="text" className="form-control" value={customer.customerId} readOnly />
+                        </div>
+                        <div className="col">
+                            <label>Username</label>
+                            <input type="text" className="form-control" value={customer.username} readOnly />
+                        </div>
+                    </div>
+                    <div className="row mb-2">
+                        <div className="col">
+                            <label>Name</label>
+                            <input type="text" className="form-control" name="customername" value={customer.customerName} onChange={onChangeHandler} required />
+                        </div>
+                        <div className="col">
+                            <label>Address</label>
+                            <input type="text" className="form-control" name="address" value={customer.address} onChange={onChangeHandler} required />
+                        </div>
+                    </div>
+                    <div className="row mb-2">
+                        <div className="col">
+                            <label>Email</label>
+                            <input type="email" className="form-control" name="email" value={customer.email} onChange={onChangeHandler} required />
+                        </div>
+                        <div className="col">
+                            <label>Mobile</label>
+                            <input type="text" className="form-control" name="mobile" value={customer.mobile} onChange={onChangeHandler} required />
+                        </div>
+                    </div>
+                    <div className="row mb-2">
+                        <div className="col">
+                            <label>Occupation</label>
+                            <input type="text" className="form-control" name="occupation" value={customer.occupation} onChange={onChangeHandler} required />
+                        </div>
+                        <div className="col">
+                            <label>Status</label>
+                            <select className="form-control" name="status" value={customer.status} onChange={onChangeHandler} required>
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button className="btn w-50 mt-3" type="submit" style={{ backgroundColor: "#007bff", color: "#fff" }} disabled={updating}>
+                        {updating ? "Updating..." : "Update"}
+                    </button>
+                    <button className="btn w-50 mt-3" onClick={() => navigate("/customer-list")} style={{ backgroundColor: "#27ae60", color: "#fff" }}>
+                        Back
+                    </button>
+                </form>
+            </div>
+        </div>
 
-          {error && <Alert variant="danger" className="text-center p-1">{error}</Alert>}
 
-          <Form onSubmit={handleUpdate}>
-            <Row className="mb-2">
-              <Col>
-                <Form.Label className="small">Customer ID</Form.Label>
-                <Form.Control type="text" size="sm" value={customer.customerId} readOnly />
-              </Col>
-              <Col>
-                <Form.Label className="small">Username</Form.Label>
-                <Form.Control type="text" size="sm" value={customer.username} readOnly />
-              </Col>
-            </Row>
-
-            <Row className="mb-2">
-              <Col>
-                <Form.Label className="small">Name</Form.Label>
-                <Form.Control type="text" size="sm" name="customername" value={customer.customerName} onChange={onChangeHandler} required />
-              </Col>
-              <Col>
-                <Form.Label className="small">Address</Form.Label>
-                <Form.Control type="text" size="sm" name="address" value={customer.address} onChange={onChangeHandler} required />
-              </Col>
-            </Row>
-
-            <Row className="mb-2">
-              <Col>
-                <Form.Label className="small">Email</Form.Label>
-                <Form.Control type="email" size="sm" name="email" value={customer.email} onChange={onChangeHandler} required />
-              </Col>
-              <Col>
-                <Form.Label className="small">Mobile</Form.Label>
-                <Form.Control type="text" size="sm" name="mobile" value={customer.mobile} onChange={onChangeHandler} required />
-              </Col>
-            </Row>
-
-            <Row className="mb-2">
-              <Col>
-                <Form.Label className="small">Occupation</Form.Label>
-                <Form.Control type="text" size="sm" name="occupation" value={customer.occupation} onChange={onChangeHandler} required />
-              </Col>
-              <Col>
-                <Form.Label className="small">Status</Form.Label>
-                <Form.Select size="sm" name="status" value={customer.status} onChange={onChangeHandler} required>
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-                </Form.Select>
-              </Col>
-            </Row>
-
-            <Button variant="primary" type="submit" size="sm" className="w-100 mt-2" disabled={updating}>
-              {updating ? "Updating..." : "Update"}
-            </Button>
-
-            <Button variant="secondary" size="sm" className="w-100 mt-2" onClick={() => navigate("/customer-list")}>
-              Back
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-    </Container>
   );
 };
 
