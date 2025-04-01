@@ -39,7 +39,7 @@ function CustomerMenu() {
             <NavDropdown title="Expense" className="mx-3 fw-bold fs-5">
               <NavDropdown.Item onClick={() => navigate("/expense-entry")}>Expense Entry</NavDropdown.Item>
               <NavDropdown.Item onClick={() => navigate("/customer-category-list")}>Category List</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigate("/expense-report")}>Expense Report</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/expenses-list")}>Expense Report</NavDropdown.Item>
             </NavDropdown>
 
             {/* Logout */}

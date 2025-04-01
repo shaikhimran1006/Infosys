@@ -24,47 +24,52 @@ public class ExpenseReportController {
     @Autowired
     private ExpenseUserService service;
 
-    @PostMapping("/expense")
-    public void save(@RequestBody Expense expense) {
-        expenseDao.save(expense);
-    }
 
-    @PutMapping("/expense")
-    public void update(@RequestBody Expense expense) {
-        expenseDao.save(expense);
-    }
+@PostMapping ("/expense")
+public void save(@RequestBody Expense expense) {
+expenseDao.save(expense);
+}
 
-    @GetMapping("/expense")
-    public List<Expense> getAllExpenses() {
-        return expenseDao.getAllExpenses();
-    }
+@PutMapping ("/expense")
+public void update(@RequestBody Expense expense) {
+expenseDao.save(expense);
+}
 
-    @GetMapping("/expense/{id}")
-    public Expense getExpenseById(@PathVariable String id) {
-        return expenseDao.getExpenseById(id);
-    }
-    @DeleteMapping("/expense/{id}")
-    public Expense deleteExpenseById(@PathVariable String id) {
-        return expenseDao.deleteExpenseById(id);
-    }
-    
+@GetMapping("/expense")
+public List<Expense> getAllExpenses() {
+    return expenseDao.getAllExpenses();
+}
 
-    @GetMapping("/expense-cust")
-    public List<Expense> getExpensesByCustomer(String customerId) {
-    	String userId=service.getUserId();
-    	Customer customer=customerDao.getCustomerByUsername(userId);
-    	customerId=customer.getCustomerId();
-        return expenseDao.getExpenseByCustomer(customerId);
-        
-    }
+@GetMapping("/expense/{id}")
+public Expense getExpenseById(@PathVariable String id) { 
+	return expenseDao.getExpenseById(id);
+}
 
-    @GetMapping("/expense-cat")
-    public List<Expense> getExpenseByCategory( Long categoryId) {
-        return expenseDao.getExpenseByCategory(categoryId);
-    }
-    
-    @GetMapping("/expense-id")
-    public String generateExpenseId() {
-    	return expenseDao.generateExpenseId();
-    }
+@DeleteMapping ("/expense/{id}")
+public void deleteExpenseById(@PathVariable String id) {
+	expenseDao.deleteExpenseById(id);
+}
+
+@GetMapping("/expense-cat")
+public List<Expense> getExpensesByCategory(Long categoryId){
+	return expenseDao.getExpensesByCategory(categoryId);
+}
+
+@GetMapping("/expense-cust")
+public List<Expense> getExpensesByCustomer(){
+	String userId=service.getUserId();
+	Customer customer=customerDao.getCustomerByUsername(userId);
+	String customerId=customer.getCustomerId();
+	return expenseDao.getExpensesByCustomer(customerId);
+}
+
+@GetMapping("/expense-cust/{id}")
+public List<Expense> getExpensesByCustomer(@PathVariable String id){
+	return expenseDao.getExpensesByCustomer(id);
+}
+
+@GetMapping("/expense-id")
+public String generateExpenseId() {
+	return expenseDao.generateExpenseId();
+}
 }
