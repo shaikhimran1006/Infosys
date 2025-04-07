@@ -34,7 +34,7 @@ function AdminMenu() {
             </NavDropdown>
 
             {/* Expense Report */}
-            <Nav.Link onClick={() => navigate("/reports")} className="fw-bold mx-3 fs-5">Expense Report</Nav.Link>
+            <Nav.Link onClick={() => navigate("/admin-report")} className="fw-bold mx-3 fs-5">Expense Report</Nav.Link>
 
             {/* Logout */}
             <Nav.Link onClick={() => navigate("/")} className="text-danger fw-bold mx-3 fs-5" style={{ cursor: "pointer" }}>

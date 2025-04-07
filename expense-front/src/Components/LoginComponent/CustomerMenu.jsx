@@ -37,9 +37,10 @@ function CustomerMenu() {
 
             {/* Expense Dropdown */}
             <NavDropdown title="Expense" className="mx-3 fw-bold fs-5">
-              <NavDropdown.Item onClick={() => navigate("/expense-entry")}>Expense Entry</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigate("/customer-category-list")}>Category List</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigate("/expenses-list")}>Expense Report</NavDropdown.Item>
+              <NavDropdown.Item href="Expense-entry">Expense Entry</NavDropdown.Item>
+              <NavDropdown.Item href="/expenseListCust">Expense List</NavDropdown.Item>
+              <NavDropdown.Item href="customer-category-list">Category List</NavDropdown.Item>
+              <NavDropdown.Item href="/Expense-bar-chart">Expense Report</NavDropdown.Item>
             </NavDropdown>
 
             {/* Logout */}

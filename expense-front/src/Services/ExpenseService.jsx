@@ -11,7 +11,7 @@ export const generateExpenseNumber = () => {
 };
 
 export const getExpensesByCustomer = () => {
-    return axios.get(`${BASE_URL}/expense-cust`);
+    return axios.get(`http://localhost:9797/exp-mng/expense-cust`);
 };
 
 export const getExpensesByCustomerId = (id) => {
