@@ -1,42 +1,40 @@
 package com.infosys.expenseManagementApplication.bean;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Customer {
+
     @Id
     private String customerId;
     private String username;
-    private String customerName;
     private String email;
+    private String customerName;
     private String address;
     private Long mobile;
     private String occupation;
     private String status;
 
+    // Default constructor
     public Customer() {
         super();
     }
 
-   
+    // Parameterized constructor
+    public Customer(String customerId, String username, String email, String customerName, 
+                    String address, Long mobile, String occupation, String status) {
+        this.customerId = customerId;
+        this.username = username;
+        this.email = email;
+        this.customerName = customerName;
+        this.address = address;
+        this.mobile = mobile;
+        this.occupation = occupation;
+        this.status = status;
+    }
 
-    public Customer(String customerId, String username, String customerName, String email, String address, Long mobile,
-			String occupation, String status) {
-		super();
-		this.customerId = customerId;
-		this.username = username;
-		this.customerName = customerName;
-		this.email = email;
-		this.address = address;
-		this.mobile = mobile;
-		this.occupation = occupation;
-		this.status = status;
-	}
-
-
-
-	public String getCustomerId() {
+    // Getters and Setters
+    public String getCustomerId() {
         return customerId;
     }
 
@@ -52,38 +50,28 @@ public class Customer {
         this.username = username;
     }
 
-    
-
-    public String getCustomerName() {
-		return customerName;
-	}
-
-
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-
-	public String getEmail() {
+    public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Long getMobile() {
@@ -110,5 +98,16 @@ public class Customer {
         this.status = status;
     }
 
-    
+    // toString method
+    @Override
+    public String toString() {
+        return "Customer [customerId=" + customerId + 
+               ", username=" + username +
+               ", email=" + email +
+               ", customerName=" + customerName +
+               ", address=" + address +
+               ", mobile=" + mobile +
+               ", occupation=" + occupation +
+               ", status=" + status + "]";
+    }
 }

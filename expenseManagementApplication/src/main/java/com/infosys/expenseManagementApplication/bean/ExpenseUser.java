@@ -1,22 +1,29 @@
 package com.infosys.expenseManagementApplication.bean;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import  java.util.*;
 
-import  jakarta.persistence.Entity;
+import java.util.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class ExpenseUser extends User{
+	
 	@Id
 	private String username;
 	private String password;
 	private String category;
+	
+	
+	 @Column(nullable = false, unique = true)
 	private String email;
 	public ExpenseUser() {
 		super("abc","pqr",new ArrayList<>());
-		}
+	}
+	
+	
 	public ExpenseUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
 			String username2, String email2, String password2, String category2) {
 		super(username, password, authorities);
@@ -25,7 +32,6 @@ public class ExpenseUser extends User{
 		this.category = category2;
 		this.email = email2;
 	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -50,13 +56,7 @@ public class ExpenseUser extends User{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Override
-	public String toString() {
-		return "ExpenseUser [username=" + username + ", password=" + password + ", category=" + category + ", email="
-				+ email + "]";
-	}
+	
+	
 
-	
-	
-	
-	}
+}

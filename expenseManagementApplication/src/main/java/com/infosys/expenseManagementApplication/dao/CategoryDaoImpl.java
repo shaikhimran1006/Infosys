@@ -9,15 +9,14 @@ import org.springframework.stereotype.Service;
 import com.infosys.expenseManagementApplication.bean.Category;
 @Service
 @Repository
-
 public class CategoryDaoImpl implements CategoryDao {
-	@Autowired
-	private CategoryRepository repository;
+    @Autowired
+    private CategoryRepository repository;
 	
-
 	@Override
 	public void save(Category category) {
 		repository.save(category);
+
 	}
 
 	@Override
@@ -28,6 +27,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public void deleteCategoryById(Long id) {
 		repository.deleteById(id);
+
 	}
 
 	@Override
@@ -36,31 +36,25 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public long generateCategoryId() {
-		Long id=repository.getMaxCategory();
+	public Long generateCategoryId() {
+		Long id = repository.getMaxCategory();
 		if(id==null) {
 			id=1001L;
-		}
-		else {
-			id++;
-		}
-		return id;
-	}
-
-	@Override
-	public void save(java.util.Locale.Category category) {
-		// TODO Auto-generated method stub
+		
+	}else {
+		id++;
 		
 	}
-
+		return id;
+	}
+	
 	@Override
 	public Category getCategoryByName(String categoryName) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.getCategoryByName(categoryName);
 	}
-
-
+	
 	
 
+    
 
 }

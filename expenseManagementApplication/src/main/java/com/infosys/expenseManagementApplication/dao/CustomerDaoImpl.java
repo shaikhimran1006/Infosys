@@ -1,78 +1,68 @@
 package com.infosys.expenseManagementApplication.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.infosys.expenseManagementApplication.bean.Customer;
-import com.infosys.expenseManagementApplication.dao.CustomerDao;
-
-import com.infosys.expenseManagementApplication.dao.CustomerRepository;
-import java.util.List;
-import java.util.Optional;
-
 @Service
-@Repository  
+@Repository
 public class CustomerDaoImpl implements CustomerDao {
-
-    @Autowired
-    private CustomerRepository customerRepository;
     
-
-    @Override
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
-
-    @Override
-    public Customer getCustomerById(String id) {
-        
-        return customerRepository.findById(id).get();
-    }
-
-   
-
-    
+	@Autowired
+	private CustomerRepository repository;
 	@Override
-	public Customer save(Customer customer) {
+	public void save(Customer customer) {
+		repository.save(customer);
+	}
 
-		return customerRepository.save(customer);
-		
+	@Override
+	public Customer getCustomerById(String id) {
+		return repository.findById(id).get();
+	}
+
+	/*@Override
+	public void deleteCustomerById(String id) {
+		repository.deleteById(id);
+
+	}*/
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		return repository.findAll();
 	}
 
 	@Override
 	public String generateCustomerId() {
-
 		Long id=0L;
-		String val=customerRepository.getMaxCustomerId();
+		String val=repository.getMaxCustomerId();
 		if(val==null)
 			id=100001L;
-		else {
+		else{
 			id=Long.parseLong(val.substring(1));
 			id++;
-		}
+			}
 		String newId="C"+id;
 		return newId;
-		
-	}
+		}
 
 	@Override
 	public List<Customer> getCurrentCustomers() {
-
-		return customerRepository.getCurrentCustomers();
+		return repository.getCurrentCustomers();
 	}
 
 	@Override
 	public String getCustomerStatusByUsername(String username) {
-		
-		return customerRepository.getCustomerStatusByUsername(username);
+		return repository.getCutsomerStatusByUsername(username);
 	}
 
 	@Override
 	public Customer getCustomerByUsername(String username) {
-		
-		return customerRepository.getCustomerByUsername(username);
+		return repository.getCustomerByUsername(username);
 	}
-
+	
+	
 	
 }

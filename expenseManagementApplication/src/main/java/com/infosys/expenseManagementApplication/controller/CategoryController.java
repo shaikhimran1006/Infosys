@@ -1,8 +1,6 @@
 package com.infosys.expenseManagementApplication.controller;
 
 import java.util.List;
-import com.infosys.expenseManagementApplication.bean.Category;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,43 +13,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.infosys.expenseManagementApplication.bean.Category;
 import com.infosys.expenseManagementApplication.dao.CategoryDao;
 
 @RestController
 @RequestMapping("/exp-mng/")
+
 @CrossOrigin(origins = "http://localhost:5656")
 public class CategoryController {
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	
 	@GetMapping("/category")
-	public List<com.infosys.expenseManagementApplication.bean.Category> displayAllCategories(){
+	public List<Category> displayAllCategories(){
 		return categoryDao.getAllCategories();
 	}
+	
 	@PostMapping("/category")
-	public void saveCategory(@RequestBody Category category) {
-		categoryDao.save(category);
-		}
-	@PutMapping("/category")
-	public void updateCategory(@RequestBody Category category) {
+	public void saveCategories(@RequestBody Category category){
 		categoryDao.save(category);
 	}
+	
+	@PutMapping("/category")
+	public void updateCategory(@RequestBody Category category){
+		categoryDao.save(category);
+	}
+	
 	@GetMapping("/category/{id}")
-	public com.infosys.expenseManagementApplication.bean.Category displayCategoryById(@PathVariable Long id){
+	public Category displayCategoryById(@PathVariable Long id){
 		return categoryDao.getCategoryById(id);
 	}
+	
 	@DeleteMapping("/category/{id}")
 	public void deleteCategoryById(@PathVariable Long id){
 		categoryDao.deleteCategoryById(id);
 	}
+	
 	@GetMapping("/category-other")
 	public Long generateCategoryId(){
-		long id=categoryDao.generateCategoryId();
-		System.out.println(id);
-		return id;
+		Long categoryId = categoryDao.generateCategoryId();
+	    //System.out.println("Generated Category ID: " + categoryId); // Print to terminal
+	    return categoryId;
 	}
+	
 	@GetMapping("/category-other/{categoryName}")
 	public Category getCategoryByName(@PathVariable String categoryName) {
 		return categoryDao.getCategoryByName(categoryName);
 	}
+	
+	
+	
 
 }

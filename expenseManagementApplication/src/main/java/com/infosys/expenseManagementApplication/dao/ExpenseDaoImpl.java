@@ -1,7 +1,5 @@
 package com.infosys.expenseManagementApplication.dao;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -9,61 +7,75 @@ import org.springframework.stereotype.Service;
 import com.infosys.expenseManagementApplication.bean.Expense;
 @Service
 @Repository
-public class ExpenseDaoImpl implements ExpenseDao{
+public class ExpenseDaoImpl implements ExpenseDao {
+
 	@Autowired
 	private ExpenseRepository repository;
-
+	//EX1000001
 	@Override
-	public void save(Expense expense) {
-		// TODO Auto-generated method stub
-		
+	public String generateExpenseNumber() {
+		Long id = 0L;   
+        String val = repository.getMaxExpenseId();
+        if (val == null) {
+            id = 1000001L;
+        } else {
+            id = Long.parseLong(val.substring(2));
+            id++;
+        }
+        String newId="EX" + id;
+        return newId;
 	}
 
-	@Override
-	public List<Expense> getAllExpenses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 @Override
+	    public Expense save(Expense expense) {
+	        return repository.save(expense);
+	    }
+	 
+     @Override
+	    public List<Expense> getAllExpenses() {
+	        return repository.findAll();
+	    }
 
 	@Override
-	public Expense getExpenseById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Expense> getExpensesByCustomer(String customerId) {
+		return repository.getExpensesByCustomer(customerId);
+	}
+	
+	@Override
+	public List<Expense> getExpensesByCategory(Long categoryId) {
+	    return repository.getExpensesByCategory(categoryId);
 	}
 
 	@Override
 	public void deleteExpenseById(String id) {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(id);
 		
 	}
-
+    
 	@Override
-	public List<Expense> getExpensesByCategory(Long categoryId) {
-		// TODO Auto-generated method stub
-		return repository.getExpensesByCategory(categoryId);
+	public Expense getExpenseById(String id) {
+		return repository.findById(id).get();
 	}
-
+	
 	@Override
-	public List<Expense> getExpensesByCustomer(String customerId) {
-		// TODO Auto-generated method stub
-		return repository.getExpensesByCustomer(customerId);
+	public List<Object[]> getTotalAmountByCategory(String customerId) {
+	    return repository.getTotalAmountByCategory(customerId);
 	}
-
 	@Override
-	public String generateExpenseId() {
-		
-		Long id=0L;
-		String val=repository.getMaxId();
-		if(val==null)
-			id=100001L;
-		else {
-			id=Long.parseLong(val.substring(2));
-			id++;
-		}
-		String newId="Ex"+id;
-		return newId;
-		
+	public List<Object[]> getTotalAmountByCategoryBetweenDates(String customerId, String startDate, String endDate) {
+	    return repository.getTotalAmountByCategoryBetweenDates(customerId, startDate, endDate);
 	}
+	
+	@Override
+    public List<Object[]> fetchCategoryWiseTotal(String customerId) {
+        return repository.findCategoryWiseTotal(customerId);
+    }
+
+    @Override
+    public List<Object[]> fetchCategoryWiseTotalByDateRange(String customerId, String startDate, String endDate) {
+        return repository.findCategoryWiseTotalByDateRange(customerId, startDate, endDate);
+    }
+
+
 
 }
