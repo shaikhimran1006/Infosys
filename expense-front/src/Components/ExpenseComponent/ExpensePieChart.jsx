@@ -47,12 +47,16 @@ const ExpensePieChart = () => {
 
   return (
 <div style={{ display: "flex", justifyContent: "flex-start", padding: "20px" }}>
-      <div style={{ width: "80%", maxWidth: "400px" }}>
-
-        <h2>Total Amount Spent per Category</h2>
-        <Pie data={chartData} />
-      </div>
+    <div style={{ width: "80%", maxWidth: "400px" }}>
+      <h2>Total Amount Spent per Category</h2>
+      <Pie
+        data={chartData}
+        options={{
+          cutout: '50%', // Donut chart
+        }}
+      />
     </div>
+  </div>
   );
 };
 

@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import ExpensePieChart from "./ExpensePieChart";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const ExpenseBarChart = () => {
+  const getMonthStartAndToday = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+
+    const start = `${yyyy}-${mm}-01`;
+    const end = `${yyyy}-${mm}-${dd}`;
+    return { start, end };
+  };
+
+  const { start, end } = getMonthStartAndToday();
+  const [startDate, setStartDate] = useState(start);
+  const [endDate, setEndDate] = useState(end);
+
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -26,13 +48,12 @@ const ExpenseBarChart = () => {
     ],
   });
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
   const fetchData = () => {
     if (!startDate || !endDate) return;
 
-    fetch(`http://localhost:9797/exp-mng/expense-total-range?startDate=${startDate}&endDate=${endDate}`)
+    fetch(
+      `http://localhost:9797/exp-mng/expense-total-range?startDate=${startDate}&endDate=${endDate}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setChartData({
@@ -58,13 +79,16 @@ const ExpenseBarChart = () => {
       .catch((error) => console.error("Error fetching expenses:", error));
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div
       style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1565021324587-5fd009870e68?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fERhcmslMjBibHVlfGVufDB8fDB8fHww')`,
+        backgroundImage: `url('https://images.unsplash.com/photo-1565021324587-5fd009870e68?w=600&auto=format&fit=crop&q=60')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
         minHeight: "100vh",
         padding: "40px",
         display: "flex",
@@ -97,7 +121,9 @@ const ExpenseBarChart = () => {
             alignItems: "center",
           }}
         >
-          <h2 style={{ marginBottom: "20px", color: "#ffffff" }}>Total Expense by Category</h2>
+          <h2 style={{ marginBottom: "20px", color: "#ffffff" }}>
+            Total Expense by Category
+          </h2>
           <div style={{ width: "100%", maxWidth: "400px" }}>
             <ExpensePieChart />
           </div>
@@ -114,7 +140,9 @@ const ExpenseBarChart = () => {
             alignItems: "center",
           }}
         >
-          <h2 style={{ marginBottom: "20px", color: "#ffffff" }}>Expense Report by Date Range</h2>
+          <h2 style={{ marginBottom: "20px", color: "#ffffff" }}>
+            Expense Report by Date Range
+          </h2>
           <div
             style={{
               display: "flex",
