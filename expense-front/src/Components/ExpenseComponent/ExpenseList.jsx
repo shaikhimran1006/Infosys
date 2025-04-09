@@ -94,7 +94,7 @@ const ExpenseList = () => {
                   <td style={{ backgroundColor: "rgba(138, 240, 242, 0.9)" }}>
                     <button
                       className="btn"
-                      onClick={() => navigate(`/expense-update/${expense.expenseNumber}`)}
+                      onClick={() => navigate(`/update-expense/:id${expense.expenseNumber}`)}
                       style={{ backgroundColor: "#2980b9", color: "#ecf0f1" }}
                     >
                       Edit

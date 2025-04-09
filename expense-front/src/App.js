@@ -59,6 +59,7 @@ function App() {
           <Route path="/Expense-entry-category/:categoryId" element={<ExpenseEntryCategory />} />
           <Route path="/Expense-bar-chart" element={<ExpenseBarChart />} />
           <Route path="/admin-report" element={<AdminExpenseReport />} />
+          <Route path="/expense-entry/:categoryId?" element={<ExpenseEntry />} />
         </Routes>
       </BrowserRouter>
     </div>
