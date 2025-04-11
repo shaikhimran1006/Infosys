@@ -16,6 +16,7 @@ const ExpenseEntry = () => {
     amount: "",
     description: "",
   });
+  const [validated, setValidated] = useState(false);
 
   useEffect(() => {
     generateExpenseNumber()
@@ -42,6 +43,13 @@ const ExpenseEntry = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setValidated(true);
+      return;
+    }
 
     // 🛡️ Basic Validation
     if (!expense.categoryId) {
@@ -108,7 +116,11 @@ const ExpenseEntry = () => {
           <u>{expense.expenseId ? "Update Expense" : "Add Expense"}</u>
         </h2>
         <br />
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className={`needs-validation ${validated ? "was-validated" : ""}`}
+        >
           <div className="form-group text-start">
             <label>Expense Number:</label>
             <input
@@ -122,7 +134,7 @@ const ExpenseEntry = () => {
           <div className="form-group mt-3 text-start">
             <label>Category:</label>
             <select
-              className="form-control"
+              className={`form-control ${!expense.categoryId && validated ? "is-invalid" : ""}`}
               name="categoryId"
               value={expense.categoryId}
               onChange={handleChange}
@@ -135,41 +147,45 @@ const ExpenseEntry = () => {
                 </option>
               ))}
             </select>
+            <div className="invalid-feedback">Please select a category.</div>
           </div>
 
           <div className="form-group mt-3 text-start">
             <label>Expense Date:</label>
             <input
               type="date"
-              className="form-control"
+              className={`form-control ${!expense.expenseDate && validated ? "is-invalid" : ""}`}
               name="expenseDate"
               value={expense.expenseDate}
               onChange={handleChange}
               required
             />
+            <div className="invalid-feedback">Please select an expense date.</div>
           </div>
 
           <div className="form-group mt-3 text-start">
             <label>Amount:</label>
             <input
               type="number"
-              className="form-control"
+              className={`form-control ${(!expense.amount || expense.amount <= 0) && validated ? "is-invalid" : ""}`}
               name="amount"
               value={expense.amount}
               onChange={handleChange}
               required
             />
+            <div className="invalid-feedback">Please enter a valid amount greater than 0.</div>
           </div>
 
           <div className="form-group mt-3 text-start">
             <label>Description:</label>
             <textarea
-              className="form-control"
+              className={`form-control ${!expense.description.trim() && validated ? "is-invalid" : ""}`}
               name="description"
               value={expense.description}
               onChange={handleChange}
               required
             />
+            <div className="invalid-feedback">Please enter a description.</div>
           </div>
 
           <br />
